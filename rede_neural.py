@@ -2,17 +2,13 @@ import torch
 import torch.nn as nn
 
 class MLP(nn.Module):
-    def __init__(self, input_dim, num_neuronios=10):
+    def __init__(self, input_dim, num_neuronios=10, taxa_dropout=0.3):
         super(MLP, self).__init__()
         
         self.camada_oculta = nn.Linear(input_dim, num_neuronios)
-        
         self.ativacao = nn.ReLU()
-        
-        self.dropout = nn.Dropout(p=0.3)
-        
+        self.dropout = nn.Dropout(p=taxa_dropout)
         self.camada_saida = nn.Linear(num_neuronios, 1)
-        
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):

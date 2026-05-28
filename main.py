@@ -6,7 +6,6 @@ import seaborn as sns
 
 def executar_experimentos():
     print("A iniciar a Bateriade Experimentos Científicos...")
-    
     X_train, X_test, y_train, y_test = dados.carregar_dados()
     tamanho_total = len(X_train)
     

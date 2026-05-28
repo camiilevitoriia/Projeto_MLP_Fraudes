@@ -1,7 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-
 MATRICULA = 2025002299 
 def gerar_amostra():
     caminho_original = "dados_log.csv/PS_20174392719_1491204439457_log.csv"

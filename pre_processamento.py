@@ -6,7 +6,6 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 def construir_pipeline(X_train):
     atributos_numericos = X_train.select_dtypes(include=['int64', 'float64']).columns.tolist()
     atributos_categoricos = X_train.select_dtypes(include=['object']).columns.tolist()
-
     pipeline_numerico = Pipeline([
         ("imputer", SimpleImputer(strategy="median")),
         ("scaler", StandardScaler())

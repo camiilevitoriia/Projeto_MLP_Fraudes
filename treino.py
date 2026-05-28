@@ -131,4 +131,5 @@ def testar_modelo_final(modelo, pipeline, X_test, y_test):
     print(f"Recall   : {recall_score(y_test, previsoes_binarias):.4f}")
     print(f"F1-Score : {f1_score(y_test, previsoes_binarias):.4f}")
     print("\nMatriz de Confusão:")
+    
     print(confusion_matrix(y_test, previsoes_binarias))

@@ -1,0 +1,19 @@
+# Ambientes Virtuais
+venv/
+env/
+.env
+
+# Python (Arquivos temporários e de cache)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pastas de dados pesados originais (Mantemos apenas o paysim_sample.csv gerado)
+dados_log.csv/
+*.zip
+*.tar.gz
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db

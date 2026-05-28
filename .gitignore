@@ -9,7 +9,7 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Pastas de dados pesados originais (Mantemos apenas o paysim_sample.csv gerado)
+# Pastas de dado pesados originais (Mantemos apenas o paysim_sample.csv gerado)
 dados_log.csv/
 *.zip
 *.tar.gz

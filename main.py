@@ -3,18 +3,19 @@ import treino
 import time
 import torch
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 def executar_experimentos_finais():
-    print("A iniciar Bateria Final: Análise de Fatores e Tabela de Métricas...")
+    print("A iniciar Bateria Final: Análise de Fatores, Tabela e Boxplot...")
     
     X_train, X_test, y_train, y_test = dados.carregar_dados()
     
-    # OS 2 FATORES EXPERIMENTAIS (Fixamos o Batch em 32 e LR em 0.01)
     configuracoes = [
         {"nome": "Padrão (10 Neurónios, Drop 0.3)", "neur": 10, "drop": 0.3},
-        {"nome": "Fator 1: Alta Capacidade (50 Neurónios)", "neur": 50, "drop": 0.3},
-        {"nome": "Fator 2: Sem Regularização (Drop 0.0)", "neur": 10, "drop": 0.0}
+        {"nome": "Fator 1: Alta Capac. (50 Neurónios)", "neur": 50, "drop": 0.3},
+        {"nome": "Fator 2: Sem Reg. (Drop 0.0)", "neur": 10, "drop": 0.0}
     ]
     
     repeticoes = 10
@@ -32,7 +33,7 @@ def executar_experimentos_finais():
             modelo, pipeline = treino.treinar_modelo_kfold(
                 X_train=X_train, 
                 y_train=y_train, 
-                batch_size=32, # Fixo para agilizar
+                batch_size=32, 
                 lr=0.01, 
                 max_epochs=50, 
                 patience=5,
@@ -40,7 +41,6 @@ def executar_experimentos_finais():
                 taxa_dropout=config["drop"]
             )
             
-            # Validação no Cofre (20% de Teste)
             X_test_prep = pipeline.transform(X_test)
             X_t_test = torch.tensor(X_test_prep, dtype=torch.float32)
             
@@ -67,19 +67,31 @@ def executar_experimentos_finais():
             })
             print(f"F1-Score obtido: {f1:.4f}")
 
-    # Gerar a Tabela Completa pedida pelo professor
     df_resultados = pd.DataFrame(resultados_completos)
-    df_resultados.to_csv("tabela_metricas_completa.csv", index=False)
+    df_resultados.to_csv("resultados/tabela_metricas_completa.csv", index=False)
+
+    df_f1 = df_resultados[["Configuração", "Repetição", "F1-Score"]]
+    df_f1.to_csv("resultados/resultados_experimentos.csv", index=False)
     
-    # Calcular as médias para exibir no ecrã
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(x="Configuração", y="F1-Score", data=df_resultados)
+    plt.title("Comparação de Desempenho (F1-Score) - Análise de Fatores")
+    plt.ylabel("F1-Score (Maior é melhor)")
+    plt.xlabel("Configurações da Rede Neural")
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig("resultados/boxplot_comparacao.png")
+    plt.close()
+    
     medias = df_resultados.groupby("Configuração").mean().drop(columns=["Repetição"])
     print("\n" + "="*60)
     print("MÉDIAS FINAIS DOS EXPERIMENTOS")
     print("="*60)
     print(medias)
     
-    print("\n✅ Concluído! Foi gerado o ficheiro 'tabela_metricas_completa.csv'.")
-    print("✅ Foi gerada a imagem 'curvas_aprendizado.png' (Curva da última configuração testada).")
+    print("\nConcluído! Ficheiro 'tabela_metricas_completa.csv' gerado.")
+    print("Imagem 'curvas_aprendizado.png' gerada (pelo treino.py).")
+    print(" Imagem 'boxplot_comparacao.png' gerada com sucesso!")
 
 if __name__ == "__main__":
     executar_experimentos_finais()

@@ -1,0 +1,31 @@
+Configuração,Repetição,Acurácia,Precisão,Recall,F1-Score,Tempo (s)
+"Padrão (10 Neurónios, Drop 0.3)",1,0.8967,0.88,0.44,0.5867,14.21
+"Padrão (10 Neurónios, Drop 0.3)",2,0.91,0.9107,0.51,0.6538,12.13
+"Padrão (10 Neurónios, Drop 0.3)",3,0.91,0.9107,0.51,0.6538,11.99
+"Padrão (10 Neurónios, Drop 0.3)",4,0.905,0.9057,0.48,0.6275,12.82
+"Padrão (10 Neurónios, Drop 0.3)",5,0.9083,0.9091,0.5,0.6452,12.46
+"Padrão (10 Neurónios, Drop 0.3)",6,0.9083,0.9412,0.48,0.6358,12.22
+"Padrão (10 Neurónios, Drop 0.3)",7,0.92,0.9483,0.55,0.6962,12.46
+"Padrão (10 Neurónios, Drop 0.3)",8,0.9,0.8704,0.47,0.6104,12.91
+"Padrão (10 Neurónios, Drop 0.3)",9,0.9067,0.9231,0.48,0.6316,13.4
+"Padrão (10 Neurónios, Drop 0.3)",10,0.92,0.9643,0.54,0.6923,13.98
+Fator 1: Alta Capac. (50 Neurónios),1,0.915,0.8657,0.58,0.6946,32.04
+Fator 1: Alta Capac. (50 Neurónios),2,0.9233,0.9219,0.59,0.7195,35.41
+Fator 1: Alta Capac. (50 Neurónios),3,0.92,0.9062,0.58,0.7073,1854.39
+Fator 1: Alta Capac. (50 Neurónios),4,0.9167,0.9032,0.56,0.6914,40.52
+Fator 1: Alta Capac. (50 Neurónios),5,0.915,0.9016,0.55,0.6832,30.5
+Fator 1: Alta Capac. (50 Neurónios),6,0.9217,0.9077,0.59,0.7152,30.88
+Fator 1: Alta Capac. (50 Neurónios),7,0.92,0.9062,0.58,0.7073,31.65
+Fator 1: Alta Capac. (50 Neurónios),8,0.9183,0.9048,0.57,0.6994,30.32
+Fator 1: Alta Capac. (50 Neurónios),9,0.9217,0.8841,0.61,0.7219,32.93
+Fator 1: Alta Capac. (50 Neurónios),10,0.92,0.8824,0.6,0.7143,31.31
+Fator 2: Sem Reg. (Drop 0.0),1,0.9117,0.873,0.55,0.6748,13.6
+Fator 2: Sem Reg. (Drop 0.0),2,0.9183,0.8806,0.59,0.7066,15.68
+Fator 2: Sem Reg. (Drop 0.0),3,0.9133,0.8636,0.57,0.6867,15.72
+Fator 2: Sem Reg. (Drop 0.0),4,0.91,0.8485,0.56,0.6747,15.21
+Fator 2: Sem Reg. (Drop 0.0),5,0.92,0.9062,0.58,0.7073,16.31
+Fator 2: Sem Reg. (Drop 0.0),6,0.915,0.8551,0.59,0.6982,14.57
+Fator 2: Sem Reg. (Drop 0.0),7,0.9133,0.8636,0.57,0.6867,15.49
+Fator 2: Sem Reg. (Drop 0.0),8,0.91,0.8594,0.55,0.6707,14.9
+Fator 2: Sem Reg. (Drop 0.0),9,0.9133,0.9,0.54,0.675,12.98
+Fator 2: Sem Reg. (Drop 0.0),10,0.9183,0.8923,0.58,0.703,15.44

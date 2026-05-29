@@ -112,7 +112,7 @@ def treinar_modelo_kfold(X_train, y_train, batch_size=32, lr=0.01, max_epochs=10
     plt.xlabel('Épocas')
     plt.legend()
     plt.tight_layout()
-    plt.savefig('curvas_aprendizado.png')
+    plt.savefig('resultados/curvas_aprendizado.png')
     plt.close()
     
     return melhor_modelo_global, melhor_pipeline

@@ -1,31 +1,31 @@
 Configuração,Repetição,F1-Score
-"Padrão (10 Neurónios, Drop 0.3)",1,0.5867
-"Padrão (10 Neurónios, Drop 0.3)",2,0.6538
-"Padrão (10 Neurónios, Drop 0.3)",3,0.6538
-"Padrão (10 Neurónios, Drop 0.3)",4,0.6275
-"Padrão (10 Neurónios, Drop 0.3)",5,0.6452
-"Padrão (10 Neurónios, Drop 0.3)",6,0.6358
-"Padrão (10 Neurónios, Drop 0.3)",7,0.6962
-"Padrão (10 Neurónios, Drop 0.3)",8,0.6104
-"Padrão (10 Neurónios, Drop 0.3)",9,0.6316
-"Padrão (10 Neurónios, Drop 0.3)",10,0.6923
-Fator 1: Alta Capac. (50 Neurónios),1,0.6946
-Fator 1: Alta Capac. (50 Neurónios),2,0.7195
-Fator 1: Alta Capac. (50 Neurónios),3,0.7073
-Fator 1: Alta Capac. (50 Neurónios),4,0.6914
-Fator 1: Alta Capac. (50 Neurónios),5,0.6832
-Fator 1: Alta Capac. (50 Neurónios),6,0.7152
-Fator 1: Alta Capac. (50 Neurónios),7,0.7073
-Fator 1: Alta Capac. (50 Neurónios),8,0.6994
-Fator 1: Alta Capac. (50 Neurónios),9,0.7219
-Fator 1: Alta Capac. (50 Neurónios),10,0.7143
-Fator 2: Sem Reg. (Drop 0.0),1,0.6748
-Fator 2: Sem Reg. (Drop 0.0),2,0.7066
-Fator 2: Sem Reg. (Drop 0.0),3,0.6867
-Fator 2: Sem Reg. (Drop 0.0),4,0.6747
-Fator 2: Sem Reg. (Drop 0.0),5,0.7073
-Fator 2: Sem Reg. (Drop 0.0),6,0.6982
-Fator 2: Sem Reg. (Drop 0.0),7,0.6867
-Fator 2: Sem Reg. (Drop 0.0),8,0.6707
-Fator 2: Sem Reg. (Drop 0.0),9,0.675
-Fator 2: Sem Reg. (Drop 0.0),10,0.703
+"Padrão (10 Neurónios, Drop 0.3)",1,0.679
+"Padrão (10 Neurónios, Drop 0.3)",2,0.6494
+"Padrão (10 Neurónios, Drop 0.3)",3,0.6267
+"Padrão (10 Neurónios, Drop 0.3)",4,0.671
+"Padrão (10 Neurónios, Drop 0.3)",5,0.6536
+"Padrão (10 Neurónios, Drop 0.3)",6,0.6625
+"Padrão (10 Neurónios, Drop 0.3)",7,0.6405
+"Padrão (10 Neurónios, Drop 0.3)",8,0.6625
+"Padrão (10 Neurónios, Drop 0.3)",9,0.64
+"Padrão (10 Neurónios, Drop 0.3)",10,0.679
+Fator 1: Alta Capac. (50 Neurónios),1,0.7024
+Fator 1: Alta Capac. (50 Neurónios),2,0.7037
+Fator 1: Alta Capac. (50 Neurónios),3,0.7273
+Fator 1: Alta Capac. (50 Neurónios),4,0.6538
+Fator 1: Alta Capac. (50 Neurónios),5,0.7229
+Fator 1: Alta Capac. (50 Neurónios),6,0.7024
+Fator 1: Alta Capac. (50 Neurónios),7,0.6871
+Fator 1: Alta Capac. (50 Neurónios),8,0.6832
+Fator 1: Alta Capac. (50 Neurónios),9,0.7024
+Fator 1: Alta Capac. (50 Neurónios),10,0.7229
+Fator 2: Sem Reg. (Drop 0.0),1,0.6452
+Fator 2: Sem Reg. (Drop 0.0),2,0.6871
+Fator 2: Sem Reg. (Drop 0.0),3,0.6497
+Fator 2: Sem Reg. (Drop 0.0),4,0.6364
+Fator 2: Sem Reg. (Drop 0.0),5,0.7066
+Fator 2: Sem Reg. (Drop 0.0),6,0.6584
+Fator 2: Sem Reg. (Drop 0.0),7,0.7066
+Fator 2: Sem Reg. (Drop 0.0),8,0.6582
+Fator 2: Sem Reg. (Drop 0.0),9,0.7059
+Fator 2: Sem Reg. (Drop 0.0),10,0.7117

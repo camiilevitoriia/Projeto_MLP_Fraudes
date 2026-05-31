@@ -46,22 +46,25 @@ def treinar_modelo_kfold(X_train, y_train, batch_size=32, lr=0.01, max_epochs=10
         epocas_sem_melhoria = 0
         
         # Histórico desta dobra (Fold)
-        historico = {'acc_train': [], 'f1_train': [], 'acc_val': [], 'f1_val': []}
+        historico = {'loss_train': [], 'loss_val': [], 'acc_train': [], 'f1_train': [], 'acc_val': [], 'f1_val': []}
         
         for epoch in range(max_epochs):
             modelo.train()
             train_preds, train_trues = [], []
+            loss_train_total = 0
             
             for batch_X, batch_y in loader_train:
                 otimizador.zero_grad()
                 previsoes = modelo(batch_X)
                 erro = criterio(previsoes, batch_y)
+                loss_train_total += erro.item()
                 erro.backward()
                 otimizador.step()
                 
                 train_preds.extend((previsoes >= 0.5).float().cpu().numpy())
                 train_trues.extend(batch_y.cpu().numpy())
             
+            loss_train = loss_train_total / len(loader_train)
             acc_train = accuracy_score(train_trues, train_preds)
             f1_train = f1_score(train_trues, train_preds, zero_division=0)
             
@@ -75,6 +78,8 @@ def treinar_modelo_kfold(X_train, y_train, batch_size=32, lr=0.01, max_epochs=10
                 f1_val = f1_score(y_fold_val, val_preds_bin, zero_division=0)
             
             # Guardar os dados para o gráfico do professor
+            historico['loss_train'].append(loss_train)
+            historico['loss_val'].append(val_loss)
             historico['acc_train'].append(acc_train)
             historico['f1_train'].append(f1_train)
             historico['acc_val'].append(acc_val)
@@ -97,15 +102,24 @@ def treinar_modelo_kfold(X_train, y_train, batch_size=32, lr=0.01, max_epochs=10
             melhor_historico = historico
             
     # GERAÇÃO DO GRÁFICO EXIGIDO PELO PROFESSOR (Apenas para o melhor fold)
-    plt.figure(figsize=(12, 5))
-    plt.subplot(1, 2, 1)
+    plt.figure(figsize=(18, 5))
+
+    plt.subplot(1, 3, 1)
+    plt.plot(melhor_historico['loss_train'], label='Treino (Loss)')
+    plt.plot(melhor_historico['loss_val'], label='Validação (Loss)')
+    plt.title('Evolução da Loss')
+    plt.xlabel('Épocas')
+    plt.ylabel('Loss')
+    plt.legend()
+
+    plt.subplot(1, 3, 2)
     plt.plot(melhor_historico['acc_train'], label='Treino (Acurácia)')
     plt.plot(melhor_historico['acc_val'], label='Validação (Acurácia)')
     plt.title('Evolução da Acurácia')
     plt.xlabel('Épocas')
     plt.legend()
     
-    plt.subplot(1, 2, 2)
+    plt.subplot(1, 3, 3)
     plt.plot(melhor_historico['f1_train'], label='Treino (F1)')
     plt.plot(melhor_historico['f1_val'], label='Validação (F1)')
     plt.title('Evolução do F1-Score')

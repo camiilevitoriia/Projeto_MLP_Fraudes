@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+
+
+
 def executar_experimentos_finais():
     print("A iniciar Bateria Final: Análise de Fatores, Tabela e Boxplot...")
     
@@ -92,6 +95,23 @@ def executar_experimentos_finais():
     print("\nConcluído! Ficheiro 'tabela_metricas_completa.csv' gerado.")
     print("Imagem 'curvas_aprendizado.png' gerada (pelo treino.py).")
     print(" Imagem 'boxplot_comparacao.png' gerada com sucesso!")
+
+    def plotar_loss(train_loss, val_loss):
+
+        plt.figure(figsize=(10, 5))
+
+        plt.plot(train_loss, label="Treino")
+        plt.plot(val_loss, label="Validação")
+
+        plt.xlabel("Épocas")
+        plt.ylabel("Loss")
+        plt.title("Loss de Treino e Validação")
+
+        plt.legend()
+
+        plt.savefig("results/loss.png")
+
+        plt.show()
 
 if __name__ == "__main__":
     executar_experimentos_finais()

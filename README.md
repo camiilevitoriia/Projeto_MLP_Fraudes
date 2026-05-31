@@ -1,285 +1,52 @@
-# 💳 Detecção de Fraudes Financeiras com MLP (Perceptron Multicamadas)
-
-Projeto desenvolvido para a disciplina de Inteligência Computacional do curso de Análise e Desenvolvimento de Sistemas da UFRN.
-
-O objetivo deste projeto é aplicar técnicas de Aprendizado de Máquina Supervisionado para identificar transações financeiras fraudulentas utilizando Redes Neurais Artificiais do tipo MLP (*Multilayer Perceptron*) implementadas com PyTorch.
-
----
-
-# 📊 1. Base de Dados e Metodologia
-
-A base utilizada foi a **PaySim - Mobile Money Transactions Simulation**, amplamente empregada em estudos de detecção de fraudes financeiras.
-
-## 🔹 Estratégia de Amostragem
-
-A base original foi reduzida para:
-
-* 2.500 transações legítimas;
-* 500 transações fraudulentas.
-
-Totalizando:
-
-* **3.000 instâncias**.
-
-Foi utilizada uma semente aleatória fixa (`2025002299`) para garantir a reprodutibilidade dos experimentos.
-
----
-
-## 🔹 Separação Holdout
-
-Antes de qualquer processamento, 20% dos dados foram separados exclusivamente para teste final (*Holdout*), evitando vazamento de informação (*Data Leakage*).
-
----
-
-## 🔹 Pipeline de Pré-processamento
-
-Foi utilizado um `ColumnTransformer` do Scikit-Learn contendo:
-
-* imputação de valores faltantes;
-* padronização com `StandardScaler`;
-* tratamento separado para variáveis numéricas e categóricas.
-
-Todo o pipeline foi aplicado apenas nos dados de treino dentro do processo de validação cruzada (*Stratified K-Fold*), garantindo maior confiabilidade estatística.
-
----
-
-# 🧠 2. Arquitetura da Rede Neural
-
-A rede neural MLP foi desenvolvida considerando simplicidade, capacidade de generalização e redução de overfitting em dados tabulares.
-
-## 🔹 Estrutura da Rede
-
-* 1 camada escondida;
-* 10 neurônios na camada oculta;
-* função de ativação ReLU;
-* camada de saída com Sigmoid;
-* treinamento supervisionado.
-
----
-
-## 🔹 Justificativas Técnicas
-
-### ✔ Número de Camadas Escondidas
-
-Foi utilizada apenas uma camada escondida devido ao tamanho relativamente pequeno do dataset e à natureza tabular dos dados.
-
-Arquiteturas muito profundas poderiam causar:
-
-* overfitting;
-* memorização do conjunto de treino;
-* pior generalização.
-
----
-
-### ✔ Número de Neurônios
-
-A escolha de 10 neurônios buscou equilibrar:
-
-* capacidade de aprendizado;
-* simplicidade;
-* menor risco de sobreajuste.
-
----
-
-### ✔ Learning Rate (0.01)
-
-A taxa de aprendizado `0.01` apresentou boa estabilidade durante os testes, permitindo convergência adequada sem oscilações excessivas.
-
----
-
-### ✔ Número Máximo de Épocas
-
-Foi definido um limite máximo de:
-
-* **50 épocas**.
-
-Além disso, foi utilizado:
-
-* **Early Stopping** com paciência igual a 5.
-
-O treinamento é interrompido automaticamente quando a perda de validação deixa de melhorar.
-
----
-
-### ✔ Funções de Ativação
-
-#### ReLU na camada oculta
-
-A função ReLU foi escolhida por:
-
-* reduzir o problema de gradientes muito pequenos;
-* acelerar o treinamento;
-* apresentar bom desempenho em redes MLP.
-
-#### Sigmoid na saída
-
-A função Sigmoid foi utilizada na camada de saída por ser adequada para classificação binária, retornando probabilidades entre `0` e `1`.
-
----
-
-# 🔬 3. Experimentos com Batch Size
-
-O projeto avaliou o impacto de diferentes estratégias de atualização de gradiente utilizando múltiplos tamanhos de lote (*Batch Size*).
-
-## 📈 Resultados Médios
-
-| Estratégia         | Batch Size | Tempo Médio/Fold | F1-Score Médio |
-| ------------------ | ---------- | ---------------- | -------------- |
-| SGD Estocástico    | 1          | ~35s             | ~0.86          |
-| Mini-Batch Pequeno | 32         | ~1.6s            | ~0.65          |
-| Mini-Batch Grande  | 128        | ~1.3s            | ~0.18          |
-| Batch Completo     | 2400       | ~1.4s            | ~0.28          |
-
----
-
-## 🔹 Análise dos Resultados
-
-O melhor desempenho foi obtido utilizando:
-
-* **SGD Estocástico (Batch Size = 1)**.
-
-### ✔ Motivo
-
-Como o problema é altamente desbalanceado, o treinamento amostra por amostra permitiu que a rede percebesse melhor os erros associados às fraudes.
-
-Já batches muito grandes acabaram diluindo o impacto das classes minoritárias, dificultando o aprendizado de padrões fraudulentos.
-
----
-
-## 🔹 Trade-off Observado
-
-O SGD apresentou:
-
-* maior custo computacional;
-* maior tempo de treinamento.
-
-Porém, entregou:
-
-* melhor capacidade de detecção;
-* maior F1-Score;
-* melhor equilíbrio entre precisão e recall.
-
----
-
-# 🛠️ 4. Tecnologias Utilizadas
-
-* Python
-* PyTorch
-* Scikit-Learn
-* Pandas
-* NumPy
-* Matplotlib
-* Google Colab
-
----
-
-# 🚀 5. Como Executar o Projeto
-
-## 1️⃣ Clone o repositório
-
-```bash
-git clone https://github.com/camiilevitoriia/Projeto_MLP_Fraudes.git
-```
-
----
-
-## 2️⃣ Entre na pasta do projeto
-
-```bash
-cd Projeto_MLP_Fraudes
-```
-
----
-
-## 3️⃣ Crie o ambiente virtual
-
-```bash
-python -m venv venv
-```
-
----
-
-## 4️⃣ Ative o ambiente virtual
-
-### Windows
-
-```bash
-.\venv\Scripts\activate
-```
-
-### Linux/Mac
-
-```bash
-source venv/bin/activate
-```
-
----
-
-## 5️⃣ Instale as dependências
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 6️⃣ Adicione o dataset
-
-Coloque o arquivo:
-
-```text
-PS_20174392719_1491204439457_log.csv
-```
-
-na pasta:
-
-```text
-dados_log.csv/
-```
-
----
-
-## 7️⃣ Execute o projeto
-
-```bash
-python main.py
-```
-
----
-
-# 📁 6. Estrutura do Projeto
-
+# 🛡️ Detecção de Fraudes Financeiras com Redes Neurais (MLP)
+
+![Status](https://img.shields.io/badge/Status-Concluído-success)
+![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?logo=pytorch&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.2+-F7931E?logo=scikit-learn&logoColor=white)
+
+Projeto prático de Inteligência Computacional desenvolvido na **Universidade Federal do Rio Grande do Norte (UFRN)** para a construção, treinamento e análise de um sistema preditivo antifraude utilizando *Deep Learning*.
+
+## 📋 Resumo Executivo
+O projeto implementa uma arquitetura de Perceptron de Múltiplas Camadas (MLP) em PyTorch para classificar transações financeiras bancárias como legítimas ou fraudulentas. O sistema utiliza técnicas de validação cruzada (K-Fold), pipelines rígidos de pré-processamento e estratégias de regularização (Dropout e Early Stopping) para maximizar o F1-Score em um cenário de alta complexidade.
+
+## 👥 Equipe
+* **Discentes:** Kayron Nilton da Silva Gomes & Camile Vitoria Gomes da Silva
+* **Docente:** Antonino Alves Feitosa Neto
+* **Disciplina:** Inteligência Computacional
+* **Curso:** Tecnologia em Análise e Desenvolvimento de Sistemas (TADS)
+
+
+## 🎯 Objetivos
+* **Geral:** Construir e avaliar o desempenho de redes neurais artificiais na detecção de anomalias financeiras.
+* **Específicos:**
+    * Tratar e balancear dados transacionais estruturados.
+    * Implementar um MLP modular utilizando a biblioteca PyTorch.
+    * Realizar experimentações variando capacidade de neurônios e taxas de Dropout.
+    * Extrair, comparar e apresentar métricas focadas em cenários desbalanceados (Recall e F1-Score).
+
+## ⚙️ Arquitetura e Fluxo do Sistema
+
+1.  **Amostragem (`dados.py`):** Coleta orientada por semente fixa (Matrícula) gerando um dataset representativo de 3.000 instâncias.
+2.  **Pipeline de Dados (`pre_processamento.py`):**
+    * *Numéricos:* Tratamento de nulos via Mediana + StandardScaler.
+    * *Categóricos:* Tratamento de nulos via Moda + OneHotEncoding.
+3.  **Arquitetura do Modelo (`rede_neural.py`):** Rede Feedforward com ativação ReLU oculta, aplicação opcional de Dropout e camada sigmoidal final.
+4.  **Treinamento (`treino.py`):** Treinamento com 5-Fold Stratified Cross-Validation, otimização SGD e salvamento inteligente do melhor estado por *Early Stopping*.
+5.  **Análise Fatorial (`main.py`):** Bateria de 30 execuções simulando 3 configurações diferentes.
+
+## 📂 Estrutura de Diretórios
 ```text
 Projeto_MLP_Fraudes/
-│
-├── dados_log.csv/
-├── notebooks/
-├── resultados/
-├── models/
-├── main.py
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
-
----
-
-# 📚 7. Conceitos Aplicados
-
-* Redes Neurais Artificiais
-* MLP (Multilayer Perceptron)
-* Backpropagation
-* Early Stopping
-* Holdout
-* Stratified K-Fold
-* Padronização de Dados
-* Data Leakage
-* Classificação Binária
-* Overfitting
-* F1-Score
-* SGD
-* Mini-Batch Gradient Descent
-
----
-
-
+├── dados.py                 # Funções de sampling e carga de dados
+├── pre_processamento.py     # Construção do pipeline sklearn
+├── rede_neural.py           # Classe da arquitetura MLP (PyTorch)
+├── treino.py                # Lógica de validação cruzada e treinamento
+├── main.py                  # Script principal e testes de hipóteses
+├── requirements.txt         # Dependências do projeto
+├── paysim_sample.csv        # Dataset de amostra gerado localmente
+└── resultados/              # (Gerado automaticamente)
+    ├── tabela_metricas_completa.csv
+    ├── resultados_experimentos.csv
+    ├── boxplot_comparacao.png
+    └── curvas_aprendizado.png
